@@ -97,3 +97,8 @@ class AlienFleet:
             if alien.rect.bottom >= self.settings.screen_height:
                 return True
         return False
+
+    def check_desroyed(self):
+        if not self.fleet:
+            return True
+        return False
