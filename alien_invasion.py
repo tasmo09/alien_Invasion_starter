@@ -5,12 +5,14 @@ from ship import Ship
 from arsenal import Arsenal
 from alien import Alien
 from fleet import AlienFleet
+from game_stats import GameStats
 
 class AlienInvasion:
 
     def __init__(self)->None:
         pygame.init()
         self.settings = Settings()
+        self.game_stats = GameStats(self.settings.starting_ships)
 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height)
@@ -37,12 +39,14 @@ class AlienInvasion:
         self.ship = Ship(self, Arsenal(self))
         self.fleet = AlienFleet(self)
         self.fleet.create_fleet()
+        self.game_active = True
 
     def run_game(self)->None:
         while self.running:
-            self._check_events()
-            self.ship.update()
-            self.check_collisions()
+            if self.game_active:
+                self._check_events()
+                self.ship.update()
+                self.check_collisions()
             self._update_screen()
             self.clock.tick(self.settings.fps)
             self.fleet.update_fleet()
@@ -68,6 +72,14 @@ class AlienInvasion:
 
         if self.fleet.check_desroyed():
             self.reset_level()
+
+    def check_game_status(self):
+        if self.game_stats.ship_limit > 0:
+            self.game_stats.ship_limit -= 1
+            self.reset_level()
+        else:
+            self.game_active = False
+
 
 
 
