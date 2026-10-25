@@ -40,7 +40,7 @@ class AlienInvasion:
             self.ship.update()
             self._update_screen()
             self.clock.tick(self.settings.fps)
-            #self.alien.update()
+            self.fleet.update_fleet()
 
     def _update_screen(self):
         self.screen.blit(self.bg_image, (0, 0))
