@@ -24,11 +24,12 @@ class AlienFleet:
 
         fleet_w, fleet_h = self.calc_fleet_size(alien_w, screen_w, alien_h, screen_h)
 
-        half_screen_w = self.settings.screen_width // 2
-        fleet_horizontal_space = fleet_w * alien_w
-        fleet_vertical_space = fleet_h * alien_h
-        x_offset = int((screen_w - fleet_horizontal_space) // 2)
-        y_offset = int((half_screen_w - fleet_vertical_space) // 2)
+        x_offset, y_offset = self.calc_offsets(alien_w, alien_h, screen_w, fleet_w, fleet_h)
+
+        self.create_rec_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
+        self.create_rec_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
+
+    def create_rec_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
         for row in range(fleet_h):
             for col in range(fleet_w):
                 current_x = alien_w * col + x_offset
@@ -36,6 +37,14 @@ class AlienFleet:
                 if col % 2 == 0 or row % 2 == 0:
                     continue
                 self._create_alien(current_x, current_y)
+
+    def calc_offsets(self, alien_w, alien_h, screen_w, fleet_w, fleet_h):
+        half_screen_w = self.settings.screen_width // 2
+        fleet_horizontal_space = fleet_w * alien_w
+        fleet_vertical_space = fleet_h * alien_h
+        x_offset = int((screen_w - fleet_horizontal_space) // 2)
+        y_offset = int((half_screen_w - fleet_vertical_space) // 2)
+        return x_offset,y_offset
 
     def calc_fleet_size(self, alien_w, screen_w, alien_h, screen_h):
         fleet_w = (screen_w//alien_w)
