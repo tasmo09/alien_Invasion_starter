@@ -21,11 +21,15 @@ class AlienInvasion:
             )
         pygame.display.set_caption(self.settings.name)
 
+
+        self.bg_image = pygame.image.load(self.settings.bg_file)
         self.bg_image = pygame.transform.scale(
             self.bg_image, (self.settings.screen_width, self.settings.screen_height)
             )
 
         self.HUD = HUD(self)
+
+        self.running = True
 
         self.running = True
 

@@ -31,7 +31,7 @@ class Settings:
         self.button_height = 50
         self.button_color = (53, 26, 77)
 
-        self.test_color = (255, 255, 255)
+        self.text_color = (255, 255, 255)
         self.button_font_size = 48
         self.HUD_font_size = 20
         self.font_file = Path.cwd() / 'Assets' / 'fonts' / 'Silkscreen' / 'Silkscreen-Bold.ttf'
