@@ -71,8 +71,11 @@ class AlienInvasion:
             self.impact_sound.fadeout(1000)
 
 
-        if self.fleet.check_desroyed():
+
+        if self.fleet.check_destroyed():
             self.reset_level()
+            self.settings.increase_difficulty()
+          
 
 
     def check_game_status(self):
@@ -93,6 +96,7 @@ class AlienInvasion:
         self.fleet.create_fleet()
 
     def restart_game(self):
+        self.settings.initialize_dynamic_settings()
         self.reset_level()
         self.ship.center_ship()
         self.game_active = True
